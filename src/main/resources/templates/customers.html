@@ -1,0 +1,75 @@
+<section class="jumbotron text-center" xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <h1 class="jumbotron-heading">Customers</h1>
+    </div>
+</section>
+
+<div class="container">
+    </br>
+    <div class="row g-3">
+        <div class="col-md-8">
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="name" placeholder="Customer name">
+                </div>
+                <div class="form-group text-center">
+                    <input type="text" class="form-control" name="surname" placeholder="Customer surname">
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" name="" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4 d-flex align-items-center justify-content-center">
+            <a href="/customers/add" class="btn btn-lg btn-dark active" role="button" aria-pressed="true">Add Customer</a>
+        </div>
+    </div>
+
+    </br>
+    <table class="table" style="border: solid #383c44 2px; background-color: aliceblue">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Customer ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Surname</th>
+            <th scope="col">Address</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Email</th>
+            <th scope="col">Date of birth</th>
+            <th scope="col">Phone number</th>
+            <th scope="col">Customer's Accounts</th>
+            <th scope="col">Edit Customer</th>
+            <th scope="col">Delete Customer</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer: ${customers}">
+            <td th:text="${customer.id}"></td>
+            <td th:text="${customer.customerName}"></td>
+            <td th:text="${customer.customerSurname}"></td>
+            <td th:text="${customer.address}"></td>
+            <td th:text="${customer.gender}"></td>
+            <td th:text="${customer.email}"></td>
+            <td th:text="${customer.formatDate(customer.dateOfBirth)}"></td>
+            <td th:text="${customer.phoneNumber}"></td>
+            <td>
+                <form th:action="@{'/accounts/customeraccount/{id}' (id=${customer.getId()})}" th:method="GET">
+                    <button type="submit" class="btn btn-success active">Accounts</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{'/customers/edit/{id}' (id=${customer.getId()})}" th:method="POST">
+                    <button type="submit" class="btn btn-primary active">Edit</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{'/customers/delete/{id}' (id=${customer.getId()})}" th:method="DELETE">
+                    <button type="submit" class="btn btn-danger active">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+
+</div>

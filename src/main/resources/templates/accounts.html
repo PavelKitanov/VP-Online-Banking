@@ -1,0 +1,72 @@
+<section class="jumbotron text-center" xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <h1 class="jumbotron-heading">Accounts</h1>
+    </div>
+</section>
+<div class="container">
+    </br>
+    <div class="row g-3">
+        <div class="col-md-8">
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="name" placeholder="Customer name">
+                </div>
+                <div class="form-group text-center">
+                    <input type="text" class="form-control" name="surname" placeholder="Customer surname">
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" name="" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4 d-flex align-items-center justify-content-center">
+            <a href="/accounts/create" class="btn btn-lg btn-dark active" role="button" aria-pressed="true">Open Account</a>
+        </div>
+    </div>
+
+    </br>
+    <table class="table" style="border: solid #383c44 2px; background-color: aliceblue">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Account ID</th>
+            <th scope="col">Customer ID</th>
+            <th scope="col">Holder name</th>
+            <th scope="col">Holder surname</th>
+            <th scope="col">Creation date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Balance</th>
+            <th scope="col">Deposits history</th>
+            <th scope="col">Withdraws history</th>
+            <th scope="col">Transfers history</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="account: ${accounts}">
+            <td th:text="${account.id}"></td>
+            <td th:text="${account.customerId}"></td>
+            <td th:text="${account.holderName}"></td>
+            <td th:text="${account.holderSurname}"></td>
+            <td th:text="${account.formatDate(account.dateCreated)}"></td>
+            <td th:text="${account.status}"></td>
+            <td th:text="${account.balance}"></td>
+            <td>
+                <form th:action="@{'/accounts/deposithistory/{id}' (id=${account.id})}" th:method="GET">
+                    <button type="submit" class="btn btn-success active">Deposits</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{'/accounts/withdrawhistory/{id}' (id=${account.id})}" th:method="GET">
+                    <button type="submit" class="btn btn-success active">Withdraws</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{'/accounts/transfershistory/{id}' (id=${account.id})}" th:method="GET">
+                    <button type="submit" class="btn btn-success active">Transfers</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+
+</div>

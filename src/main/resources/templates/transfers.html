@@ -1,0 +1,76 @@
+<section class="jumbotron text-center" xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <h1 class="jumbotron-heading">Transfers</h1>
+    </div>
+</section>
+<div class="container">
+    </br>
+    <div class="row g-3">
+        <div class="col-md-8">
+            <form>
+                <div class="form-group">
+                    <div class="col row">
+                        <label for="start date" class="col-md-4" style="text-align: right ; margin-top: 5px">Start date</label>
+                        <div class="col">
+                            <input type="date" name="fromdate" id="start date" class="form-control w-75">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col row">
+                        <label for="end date" class="col-md-4" style="text-align: right ; margin-top: 5px">End date</label>
+                        <div class="col">
+                            <input type="date" name="todate" id="end date" class="form-control w-75">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" name="" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4 d-flex align-items-center justify-content-center">
+            <a href="/transfers/addtransfer" class="btn btn-lg btn-dark active" role="button" aria-pressed="true">Add transfer</a>
+        </div>
+    </div>
+
+    </br>
+
+
+    <table class="table" style="border: solid #383c44 2px; background-color: aliceblue">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Transfer ID</th>
+            <th scope="col">Sender account ID</th>
+            <th scope="col">Sender ID</th>
+            <th scope="col">Sender name and surname</th>
+            <th scope="col">Receiver account ID</th>
+            <th scope="col">Receiver ID</th>
+            <th scope="col">Receiver name and surname</th>
+            <th scope="col">Date</th>
+            <th scope="col">Transfer amount</th>
+            <th scope="col">Cancel transfer</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="transfer: ${transfers}">
+            <td th:text="${transfer.id}"></td>
+            <td th:text="${transfer.senderAccount.id}"></td>
+            <td th:text="${transfer.senderAccount.customerId}"></td>
+            <td th:text="${transfer.senderAccount.holderName}+' '+${transfer.senderAccount.holderSurname}"></td>
+            <td th:text="${transfer.receiverAccount.id}"></td>
+            <td th:text="${transfer.receiverAccount.customerId}"></td>
+            <td th:text="${transfer.receiverAccount.holderName}+' '+${transfer.receiverAccount.holderSurname}"></td>
+            <td th:text="${transfer.formatDate(transfer.transferDate)}"></td>
+            <td th:text="${transfer.transferAmount}"></td>
+            <td>
+                <form th:action="@{'/transfers/delete/{id}' (id=${transfer.id})}" th:method="DELETE">
+                    <button type="submit" class="btn btn-danger active">Cancel</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+
+</div>

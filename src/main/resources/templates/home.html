@@ -1,0 +1,30 @@
+<section class="jumbotron text-center" xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <h1 class="jumbotron-heading">Online Banking</h1>
+    </div>
+</section>
+
+<div class="container">
+    </br>
+    </br>
+    <div class="card-deck mh-50">
+        <div class="card" style="background-color: #383c44; color: white">
+            <div class="card-body text-center">
+                <h1 class="card-title" style="font-size: 100px"><th:block th:text="${customers}"></th:block></h1>
+                <p class="card-text" style="font-size: 50px">Customers</p>
+            </div>
+        </div>
+        <div class="card" style="background-color: #383c44; color: white">
+            <div class="card-body text-center">
+                <h1 class="card-title" style="font-size: 100px"><th:block th:text="${accounts}"></th:block></h1>
+                <p class="card-text" style="font-size: 50px">Accounts</p>
+            </div>
+        </div>
+        <div class="card" style="background-color: #383c44; color: aliceblue">
+            <div class="card-body text-center">
+                <h1 class="card-title" style="font-size: 100px"><th:block th:text="${transactions}"></th:block></h1>
+                <p class="card-text" style="font-size: 50px">Transactions</p>
+            </div>
+        </div>
+    </div>
+</div>

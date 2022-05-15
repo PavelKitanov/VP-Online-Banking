@@ -1,0 +1,32 @@
+<section class="jumbotron text-center" xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <h1 class="jumbotron-heading">Create Account</h1>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-sm-12 col-lg-6 mx-auto">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                </div>
+                <div class="panel-body">
+                    <form name="myform" action="/accounts/create" method="POST">
+                        <div class="form-group">
+                            <label for="customerId">Gender</label>
+                            <select name="customerId" id="customerId" class="form-control">
+                                <option th:each="customer: ${customers}" th:value="${customer.id}" th:text="${customer.getAll()}"></option>
+                            </select>
+                            <span id="error_customerId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="balance">Starting amount:</label>
+                            <input id="balance" name="balance" class="form-control" required="required" type="number">
+                            <span th:if="${flag} == true" id="error_balance" class="text-danger">The amount must be greater than or equal to 0.</span>
+                        </div>
+                        <button id="submit" type="submit" value="submit" class="btn btn-primary center">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

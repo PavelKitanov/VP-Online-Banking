@@ -1,0 +1,48 @@
+<section class="jumbotron text-center" xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <h1 class="jumbotron-heading">Add Transfer</h1>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-sm-12 col-lg-6 mx-auto">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                </div>
+                <div class="panel-body">
+                    <form name="myform" action="/accounts/transfer" method="POST">
+                        <div class="form-group">
+                            <label for="senderId">Transfer from:</label>
+                            <select name="senderId" id="senderId" class="form-control">
+                                <option th:each="acount: ${accounts}"
+                                        th:value="${acount.id}"
+                                        th:text="${acount.getAll()}">
+                                </option>
+                            </select>
+                            <span id="error_senderId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="receiverId">Transfer to:</label>
+                            <select name="receiverId" id="receiverId" class="form-control">
+                                <option th:each="acount: ${accounts}"
+                                        th:value="${acount.id}"
+                                        th:text="${acount.getAll()}">
+                                </option>
+                            </select>
+                            <span th:if="${flag3}==true" class="text-danger">Sender and Receiver account is same account.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Transfer Amount</label>
+                            <input id="amount" name="amount" class="form-control" type="number" value="0" required="required">
+                            <span th:if="${flag1} == true" class="text-danger">The transfer amount is greater than the sender's account balance.</span>
+                            <span th:if="${flag2} == true" class="text-danger">The transfer amount must be greater than 0.</span>
+                        </div>
+                        <button id="submit" type="submit" value="submit" class="btn btn-primary center">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

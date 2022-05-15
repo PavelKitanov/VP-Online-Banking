@@ -1,0 +1,70 @@
+<section class="jumbotron text-center" xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <h1 class="jumbotron-heading">Withdraws</h1>
+    </div>
+</section>
+<div class="container">
+    </br>
+    <div class="row g-3">
+        <div class="col">
+            <form>
+                <div class="form-group">
+                    <div class="col row">
+                        <label for="start date" class="col-md-4" style="text-align: right ; margin-top: 5px">Start date</label>
+                        <div class="col">
+                            <input type="date" name="fromdate" id="start date" class="form-control w-50">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <div class="col row">
+                        <label for="end date" class="col-md-4" style="text-align: right ; margin-top: 5px">End date</label>
+                        <div class="col">
+                            <input type="date" name="todate" id="end date" class="form-control w-50">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" name="" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </br>
+    <table class="table" style="border: solid #383c44 2px; background-color: aliceblue">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Withdraw ID</th>
+            <th scope="col">Account ID</th>
+            <th scope="col">Customer ID</th>
+            <th scope="col">Holder name</th>
+            <th scope="col">Holder surname</th>
+            <th scope="col">Date</th>
+            <th scope="col">Balance before withdraw</th>
+            <th scope="col">Withdraw amount</th>
+            <th scope="col">Balance after withdraw</th>
+            <th scope="col">Cancel withdraw</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="withdraw: ${withdraws}">
+            <td th:text="${withdraw.id}"></td>
+            <td th:text="${withdraw.withdrawAccount.id}"></td>
+            <td th:text="${withdraw.withdrawAccount.customerId}"></td>
+            <td th:text="${withdraw.withdrawAccount.holderName}"></td>
+            <td th:text="${withdraw.withdrawAccount.holderSurname}"></td>
+            <td th:text="${withdraw.formatDate(withdraw.withdrawDate)}"></td>
+            <td th:text="${withdraw.beforeWithdrawAmount}"></td>
+            <td th:text="${withdraw.withdrawAmount}"></td>
+            <td th:text="${withdraw.afterWithdrawAmount}"></td>
+            <td>
+                <form th:action="@{'/withdraws/delete/{id}' (id=${withdraw.id})}" th:method="DELETE">
+                    <button type="submit" class="btn btn-danger active">Cancel</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+
+</div>
